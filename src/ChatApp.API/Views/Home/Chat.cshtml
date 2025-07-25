@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Chat";
+    var clientId = Context.Request.Query["clientId"].ToString();
+    var allClients = new[] { "Client1", "Client2", "Client3" };
+    var otherClients = allClients.Where(c => c != clientId).ToList();
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5" style="max-width: 600px;">
+    <h2 class="text-center text-primary fw-bold mb-4">Welcome, @clientId</h2>
+
+    <!-- Chat Display -->
+    <div id="chatbox" class="border rounded mb-3 p-3" style="height: 300px; overflow-y: auto; background-color: #f8f9fa;">
+        <!-- Messages will appear here -->
+    </div>
+
+    <!-- Message Input and Send -->
+    <div class="input-group">
+        <input type="text" id="msg" class="form-control" placeholder="Type message..." />
+        <select id="to" class="form-select" style="max-width: 160px;">
+            <option value="All">All (Public)</option>
+            @foreach (var client in otherClients)
+            {
+                <option value="@client">@client</option>
+            }
+        </select>
+        <button class="btn btn-primary" onclick="send()">Send</button>
+    </div>
+</div>
+
+<script>
+    const clientId = @Html.Raw(Json.Serialize(@clientId));
+    const protocol = location.protocol === "https:" ? "wss" : "ws";
+    const socket = new WebSocket(`${protocol}://${location.host}/ws?clientId=${clientId}`);
+
+    socket.onopen = () => console.log("WebSocket connected");
+    socket.onerror = err => console.error("WebSocket error:", err);
+    socket.onclose = () => console.warn("WebSocket closed");
+    socket.onmessage = event => {
+        const chat = document.getElementById("chatbox");
+        chat.innerHTML += `<div>${event.data}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    function send() {
+        const msgInput = document.getElementById("msg");
+        const msg = msgInput.value.trim();
+        const to = document.getElementById("to").value;
+
+        if (!msg) return;
+
+        const formatted = to === "All" ? `@@All ${msg}` : `@@${to} ${msg}`;
+        socket.send(formatted);
+        msgInput.value = "";
+    }
+</script>
