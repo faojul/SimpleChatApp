@@ -2,7 +2,7 @@
 
 A real-time, extensible chat application built using **.NET 9**, leveraging **Clean Architecture**, **Razor Pages with MVC pattern**, and **WebSocket** for real-time communication.
 
-This project showcases not only scalable backend design but also future integration with **AI/ML agents**, **JWT**, **RSA encryption**, **SignalR**, **unit tests**, and **Docker**.
+This project showcases scalable backend design and now includes Docker support, along with future integration plans for AI/ML agents, JWT, RSA encryption, SignalR, and unit tests.
 
 ---
 
@@ -13,14 +13,7 @@ This project showcases not only scalable backend design but also future integrat
 - ✅ Built on **.NET 9**, **Razor Pages**, **MVC pattern**
 - ✅ Client registration via `/ws?clientId=xyz`
 - ✅ Message routing: public or private via `@clientId`
-- ✅ AI/ML agent auto-responder (**Planned**)
-- 🔐 JWT-based client authentication (**Planned**)
-- 🔐 RSA-based end-to-end encryption (**Planned in P2**)
-- 🧩 Dynamic client tracking and UI (**Planned in P3**)
-- 🐳 Docker support for easy deployment (**Planned in P1**)
-- 🗃️ Chat history persistence to database (**Planned**)
-- 🧪 Unit testing for core logic (**Planned**)
-- 🔄 SignalR support for improved real-time communication (**Planned**)
+- 🐳 Docker support for easy deployment
 
 ---
 
@@ -43,17 +36,18 @@ A built-in AI agent (e.g., `@Bot`) will:
 | Backend           | ASP.NET Core 9                            |
 | Architecture      | Clean Architecture                        |
 | Frontend View     | Razor Pages (MVC Pattern)                 |
+| Deployment        | Docker               |
 | Real-Time Comm    | WebSocket (SignalR Planned)               |
 | Authentication    | JWT (Planned)                             |
 | Encryption        | RSA (Planned)                             |
 | AI/ML Agent       | ML.NET / Python APIs / LangChain (Planned)|
-| Deployment        | Docker (Planned)                          |
 | Data Storage      | SQL Server / PostgreSQL (Planned)         |
 | Testing           | xUnit / NUnit (Planned)                   |
 
 ---
 
 ## 📁 Project Structure
+
 ChatApp/
 ├── Chat.API/ # Presentation Layer (Razor Pages)
 ├── Chat.Application/ # Application Layer (Use Cases, Interfaces)
@@ -61,16 +55,16 @@ ChatApp/
 ├── Chat.Infrastructure/ # Infrastructure (WebSockets, DB, External APIs)
 │ └── AI/ # AI Agent logic (Planned)
 ├── Chat.Tests/ # Unit Tests (Planned)
-└── Dockerfile # Docker Support (Planned)
+└── Dockerfile # Docker Support
 
 
 ---
 
 ## 🔧 Planned Improvements
 
-| Priority | Feature                              | Description                                        |
-|----------|--------------------------------------|----------------------------------------------------|
-| 🐳 P1     | Dockerization                        | Containerize the app for easy deployment           |
+| Priority | Feature                              | Description                                         |
+|----------|--------------------------------------|-----------------------------------------------------|
+| 🐳 P1     | Dockerization                        | Containerize the app for easy deployment (Done)           |
 | 🔐 P2     | RSA Encryption                       | End-to-end encrypted messaging                     |
 | 🔐 P2     | JWT Authentication                   | Secure client identity and session                 |
 | 🤖 P2     | AI/ML Agent                          | Add `@Bot` that replies with smart responses       |
@@ -90,14 +84,21 @@ ChatApp/
 - (Optional) Docker
 - (Optional) Python or ML.NET environment for AI agent
 
-### Run the Application
+### Option 1: Run with Docker (Recommended)
 
 ```bash
-# From root
+docker build -t simple-chat-app .
+docker run -p 8080:8080 -p 8081:8081 simple-chat-app
+````
+Then visit: https://localhost:8080/ or whatever port you mapped.
+
+### Option 2: Run Locally with .NET
+
+```bash
 dotnet run --project Chat.API
 ````
-Then visit:
-https://localhost:7016/
+Then visit: https://localhost:7016/
+
 
 💡 License
 This project is licensed under the MIT License.
