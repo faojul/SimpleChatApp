@@ -48,15 +48,17 @@ A built-in AI agent (e.g., `@Bot`) will:
 
 ## 📁 Project Structure
 
+```plaintext
 ChatApp/
-├── Chat.API/ # Presentation Layer (Razor Pages)
-├── Chat.Application/ # Application Layer (Use Cases, Interfaces)
-├── Chat.Domain/ # Domain Layer (Entities, Models)
-├── Chat.Infrastructure/ # Infrastructure (WebSockets, DB, External APIs)
-│ └── AI/ # AI Agent logic (Planned)
-├── Chat.Tests/ # Unit Tests (Planned)
-└── Dockerfile # Docker Support
+├── Chat.API/               # Presentation Layer (Razor Pages)
+├── Chat.Application/       # Application Layer (Use Cases, Interfaces)
+├── Chat.Domain/            # Domain Layer (Entities, Models)
+├── Chat.Infrastructure/    # Infrastructure (WebSockets, DB, External APIs)
+│   └── AI/                # AI Agent logic (Planned)
+├── Chat.Tests/             # Unit Tests (Planned)
+└── Dockerfile              # Docker Support
 
+````
 
 ---
 
