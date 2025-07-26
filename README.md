@@ -89,15 +89,15 @@ ChatApp/
 ### Option 1: Run with Docker (Recommended)
 
 ```bash
-docker build -t simple-chat-app .
-docker run -p 8080:8080 -p 8081:8081 simple-chat-app
+docker build -t chatapp-api -f src/ChatApp.API/Dockerfile .
+docker run -d -p 5000:8080 --name chatapp-api chatapp-api
 ````
 Then visit: https://localhost:8080/ or whatever port you mapped.
 
 ### Option 2: Run Locally with .NET
 
 ```bash
-dotnet run --project Chat.API
+dotnet run --project src/ChatApp.API/ChatApp.API.csproj
 ````
 Then visit: https://localhost:7016/
 
